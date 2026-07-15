@@ -1,18 +1,4 @@
-# apps/web-service/main.py
-
-from fastapi import FastAPI
 from pydantic import BaseModel, Field
-
-# 根据环境变量决定
-import os
-
-is_production = os.getenv("ENVIRONMENT") == "production"
-
-app = FastAPI(
-    docs_url=None if is_production else "/docs",
-    redoc_url=None if is_production else "/redoc",
-    openapi_url=None if is_production else "/openapi.json",
-)
 
 
 class Item(BaseModel):
@@ -43,18 +29,3 @@ class Item(BaseModel):
         ge=0.0,
         examples=[19.99, 0.0, 100.5],  # 示例值列表
     )
-
-
-@app.get("/", summary="Hello World", description="这是一个测试接口")  # 定义路由
-async def read_root():
-    return {"Hello": "World"}
-
-
-@app.get("/items/{item_id}")
-def read_item(item_id: int, q: str | None = None):
-    return {"item_id": item_id, "q": q}
-
-
-@app.put("/items/{item_id}")
-def update_item(item_id: int, item: Item):
-    return {"item_name": item.name, "item_id": item_id}
