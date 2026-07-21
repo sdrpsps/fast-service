@@ -39,7 +39,7 @@ def _create_cur():
 
 def _start_server():
     global _server_process, _log_file
-    tmp_dir = Path(__file__).resolve().parent.parent.parent.parent / "tmp"
+    tmp_dir = Path(__file__).resolve().parent.parent.parent.parent.parent / "tmp"
     tmp_dir.mkdir(exist_ok=True)
     _log_file = open(tmp_dir / "test_server.log", "w")
     _server_process = subprocess.Popen(
@@ -96,7 +96,7 @@ def pytest_sessionstart(session):
     from alembic.config import Config
     from alembic import command
 
-    WEB_SERVICE_DIR = Path(__file__).resolve().parent.parent
+    WEB_SERVICE_DIR = Path(__file__).resolve().parent.parent.parent
     alembic_cfg = Config()
     alembic_cfg.set_main_option("script_location", str(WEB_SERVICE_DIR / "migrations"))
     alembic_cfg.set_main_option(
