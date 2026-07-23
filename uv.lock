@@ -1276,6 +1276,7 @@ source = { editable = "apps/web-service" }
 dependencies = [
     { name = "alembic" },
     { name = "asyncpg" },
+    { name = "duyi-utils" },
     { name = "fastapi", extra = ["standard"] },
     { name = "psycopg2-binary" },
     { name = "pydantic-settings" },
@@ -1286,6 +1287,7 @@ dependencies = [
 requires-dist = [
     { name = "alembic", specifier = "==1.18.4" },
     { name = "asyncpg", specifier = "==0.31.0" },
+    { name = "duyi-utils", editable = "packages/duyi-utils" },
     { name = "fastapi", extras = ["standard"], specifier = "==0.136.3" },
     { name = "psycopg2-binary", specifier = "==2.9.12" },
     { name = "pydantic-settings", specifier = "==2.14.1" },
