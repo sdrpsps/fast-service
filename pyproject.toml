@@ -1,5 +1,5 @@
 [project]
-name = "fast-service"
+name = "duyi-service"
 version = "0.1.0"
 description = "Add your description here"
 readme = "README.md"
@@ -24,7 +24,12 @@ dev = [
 
 [tool.pytest.ini_options]
 asyncio_mode = "auto"
-testpaths = ["test"]
 markers = [
     "smoke: 标记为冒烟测试，验证核心流程是否正常",
+]
+
+[tool.test-runner]
+test_dirs = [
+    "apps/*/test",
+    "packages/*/test",
 ]

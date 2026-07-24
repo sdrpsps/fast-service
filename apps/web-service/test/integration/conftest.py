@@ -105,6 +105,22 @@ async def db_session():
 
 
 @pytest.fixture
+async def auth_token(db_session):
+    from app.schema.user import UserLogin, UserRegister
+    from app.service.user_service import UserService
+
+    svc = UserService(db_session)
+    await svc.register(UserRegister(username="testuser", password="test123456"))
+    result = await svc.login(UserLogin(username="testuser", password="test123456"))
+    return result.access_token
+
+
+@pytest.fixture
+def auth_headers(auth_token):
+    return {"Authorization": f"Bearer {auth_token}"}
+
+
+@pytest.fixture
 async def async_client(db_session):
     from app.core.database import get_db
     from app.main import app
