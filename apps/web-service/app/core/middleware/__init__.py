@@ -2,9 +2,14 @@ import inspect
 
 from fastapi import FastAPI
 
-from app.core.middleware import process_time, response, cors
+from app.core.middleware import response, process_time, cors, logging
 
-MIDDLEWARES = [process_time.MIDDLEWARE, cors.MIDDLEWARE, response.MIDDLEWARE]
+MIDDLEWARES = [
+    process_time.MIDDLEWARE,
+    logging.MIDDLEWARE,
+    cors.MIDDLEWARE,
+    response.MIDDLEWARE,
+]
 
 
 def register_middleware(app: FastAPI) -> None:
@@ -12,4 +17,4 @@ def register_middleware(app: FastAPI) -> None:
         if inspect.isclass(callable_obj):
             app.add_middleware(callable_obj, **kwargs)
         else:
-            app.middleware("http")(callable_obj)
+            app.middleware("http")(callable_obj, **kwargs)
